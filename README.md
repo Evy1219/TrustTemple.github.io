@@ -1,1 +1,1 @@
-# -DivineTrustTemple-.github.io
+# TrustTemple-.github.io
