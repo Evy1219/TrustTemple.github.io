@@ -19,7 +19,7 @@
     min-height: 100vh;
   }
 
-  /* Animated loading screen styles */
+  /* Loading overlay styles */
   #loading {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -120,6 +120,24 @@
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8em;
   }
+
+  /* Back button style (stickers) */
+  #backButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #00FF00;
+    color: #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00FF00;
+    cursor: pointer;
+    display: none; /* hidden initially */
+    z-index: 9998;
+    user-select: none;
+  }
 </style>
 </head>
 <body>
@@ -147,19 +165,34 @@
   <p>Built with the spirit of simplicity and retro style.</p>
 </div>
 
+<!-- Back button (stickers) -->
+<button id="backButton">Back</button>
+
 <!-- Footer -->
 <footer>
   &copy; 2025 TrustTemple
 </footer>
 
-<!-- Script to handle loading -->
+<!-- Script to handle loading and back button -->
 <script>
-  // Show main content after loading animation
+  const loading = document.getElementById('loading');
+  const mainContent = document.getElementById('mainContent');
+  const backBtn = document.getElementById('backButton');
+
+  // Show main content after animation
   window.onload = () => {
     setTimeout(() => {
-      document.getElementById('loading').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
-    }, 4000); // 4 seconds for animation
+      loading.style.display = 'none';
+      mainContent.style.display = 'block';
+      backBtn.style.display = 'block'; // Show back button
+    }, 4000);
+  };
+
+  // When "Back" button clicked, show loading again
+  backBtn.onclick = () => {
+    loading.style.display = 'flex';
+    mainContent.style.display = 'none';
+    backBtn.style.display = 'none'; // hide back button
   };
 </script>
 
