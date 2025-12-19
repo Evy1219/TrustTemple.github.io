@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <title>Trust Temple</title>
-<!-- Pixel font for 64-bit style -->
+<!-- Google Fonts for futuristic style -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+<!-- Pixel font for other parts -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 <style>
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Press Start 2P', cursive;
+    font-family:'Press Start 2P', cursive;
     background-color: #000;
     color: #fff;
     height: 100vh;
@@ -71,7 +73,6 @@
   50% { box-shadow: 0 0 20px #0f0; }
   100% { box-shadow: 0 0 10px #0f0; }
 }
-
 /* Main styles */
 #mainContent {
   display: none;
@@ -95,22 +96,42 @@
   font-size: 2em;
   font-family: Courier New;
 }
-/* "Hello World" Loop Style */
+/* "Who Am I" box at top */
+#topBoxContainer {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #1a1a1a;
+}
+#topBoxContainer .title-box {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #006400;
+  text-align: center;
+  box-shadow: 0 0 15px #00FF00;
+}
+#topBoxContainer .title-box h3 {
+  margin: 0;
+  font-size: 2em;
+}
+
+/* Middle "Hello World" animation */
 #helloLoopContainer {
   width: 100%;
-  overflow: hidden;
-  height: 50px;
-  background-color: #222;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: transparent; /* no background */
+  overflow: hidden;
 }
 #helloText {
+  font-family: 'Orbitron', sans-serif; /* Futuristic font */
+  font-size: 2em;
+  color: #00FF00; /* Green glow */
   white-space: nowrap;
   display: inline-block;
-  font-family:'Press Start 2P', cursive;
-  font-size: 2em;
-  color:#00FF00;
   animation: scrollLeft 10s linear infinite;
 }
 @keyframes scrollLeft {
@@ -121,7 +142,8 @@
     transform: translateX(-100%);
   }
 }
-/* Content layout for boxes */
+
+/* The three boxes underneath */
 #middleSection {
   display: flex;
   flex-direction: column;
@@ -181,7 +203,6 @@
   box-shadow: 0 0 20px #0f0;
   font-family: 'Press Start 2P';
   font-size: 0.8em;
-  cursor: pointer;
 }
 #backBtn:hover {
   box-shadow: 0 0 40px #0f0;
@@ -200,19 +221,24 @@
   <button id="enterBtn">Enter</button>
 </div>
 
-<!-- Main content -->
+<!-- Main page -->
 <div id="mainContent">
   <button id="backBtn">Back</button>
   <div id="header">
     <h1>Trust Temple</h1>
   </div>
   
-  <!-- "Hello World" Loop Container -->
+  <!-- "Who Am I" box at top -->
+  <div id="topBoxContainer">
+    <div class="title-box"><h3>Who Am I ?</h3></div>
+  </div>
+  
+  <!-- "Hello World" scrolling text in the middle -->
   <div id="helloLoopContainer">
     <div id="helloText">HELLO WORLD &nbsp; HELLO WORLD &nbsp; HELLO WORLD &nbsp; HELLO WORLD &nbsp; </div>
   </div>
   
-  <!-- Middle boxes in grid -->
+  <!-- Three boxes underneath -->
   <div id="middleSection">
     <div id="middleBoxes">
       <div class="section-box">
@@ -240,7 +266,7 @@
   setTimeout(() => {
     document.getElementById('enterBtn').classList.add('show');
   }, 3000);
-  // Enter button click
+  // Enter page transition
   document.getElementById('enterBtn').onclick = () => {
     document.getElementById('introContainer').style.transition = 'opacity 0.5s';
     document.getElementById('introContainer').style.opacity = 0;
