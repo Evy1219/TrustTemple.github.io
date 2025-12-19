@@ -102,7 +102,7 @@
   flex-direction: column;
 }
 
-/* Top "Who Am I?" box */
+/* Top "Who Am I?" box - bigger and glowing */
 #topBoxContainer {
   width: 100%;
   padding: 10px 0;
@@ -111,16 +111,18 @@
 #topBoxContainer .title-box {
   margin: 0 auto;
   max-width: 800px;
-  padding: 10px;
+  padding: 20px; /* bigger padding for size */
   border-radius: 8px;
   border: 2px solid #006400;
   text-align: center;
+  box-shadow: 0 0 15px #00FF00; /* constant glow effect */
 }
 #topBoxContainer .title-box h3 {
   margin: 0;
+  font-size: 2em; /* larger font size */
 }
 
-/* Box below "Who Am I?" for updated content */
+/* Box below "Who Am I?" for updated content with glow */
 #nABoxContainer {
   width: 100%;
   display: flex;
@@ -135,7 +137,7 @@
   border-radius: 8px;
   border: 2px solid #006400;
   padding: 10px;
-  font-family: Josefin Sans;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 1em;
   min-height: 80px; /* Ensures enough space for your text */
   display: flex;
@@ -143,6 +145,8 @@
   justify-content: center;
   color: #fff;
   text-align: center;
+  box-shadow: 0 0 15px #00FF00; /* constant glow effect */
+  transition: box-shadow 0.3s ease;
 }
 
 /* Centered middle boxes area */
@@ -171,9 +175,11 @@
   border-radius: 8px;
   border: 2px solid #006400;
   text-align: center;
+  box-shadow: 0 0 10px #00FF00; /* initial glow */
+  transition: box-shadow 0.3s ease;
 }
-.title-box h3 {
-  margin: 0;
+.title-box:hover {
+  box-shadow: 0 0 20px #00FF00; /* glow on hover */
 }
 .content-box {
   background-color: #1a1a1a;
