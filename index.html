@@ -133,61 +133,48 @@
   text-align: center;
 }
 
-/* "Hello World" scrolling with glitch effect */
-#helloLoopContainer {
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent; /* no background */
-  overflow: hidden;
-  margin-top: 20px;
-}
-#helloText {
-  font-family: 'Orbitron', sans-serif; /* Futuristic font */
+/* Floating quote "HELLO WORLD" with reactive movement */
+#helloFloating {
+  position: absolute;
+  top: 150px; /* slightly above the boxes */
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Orbitron', sans-serif;
   font-size: 2em;
-  color: #00FF00; /* Glow color */
+  color: #00FF00;
   white-space: nowrap;
-  display: inline-block;
-  animation: scrollLeft 15s linear infinite, glitch 1s steps(2, start) infinite;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid #00FF00;
+  background: transparent;
+  user-select: none;
+  cursor: default;
+  /* To give it a unique look with quotes */
+  font-family: 'Orbitron', sans-serif;
 }
-@keyframes scrollLeft {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+#helloFloating::before,
+#helloFloating::after {
+  content: '"';
+  font-size: 2em;
+  color: #00FF00;
+  margin: 0 5px;
 }
-/* Glitch animation for flickering effect */
 @keyframes glitch {
-  0% {
-    text-shadow: none;
-  }
-  20% {
-    text-shadow: 2px 0 red, -2px 0 blue;
-  }
-  40% {
-    text-shadow: -2px 0 red, 2px 0 blue;
-  }
-  60% {
-    text-shadow: none;
-  }
-  80% {
-    text-shadow: 1px 0 red, -1px 0 blue;
-  }
-  100% {
-    text-shadow: none;
-  }
+  0% { text-shadow: none; }
+  20% { text-shadow: 2px 0 red, -2px 0 blue; }
+  40% { text-shadow: -2px 0 red, 2px 0 blue; }
+  60% { text-shadow: none; }
+  80% { text-shadow: 1px 0 red, -1px 0 blue; }
+  100% { text-shadow: none; }
 }
 
-/* The three boxes underneath */
+/* Animate scrolling for the main content boxes */
 #middleSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px 0;
+  margin-top: 250px; /* space below the floating text */
 }
 #middleBoxes {
   display: grid;
@@ -275,12 +262,10 @@
     </div>
   </div>
   
-  <!-- "Hello World" scrolling message with glitch -->
-  <div id="helloLoopContainer">
-    <div id="helloText"></div>
-  </div>
+  <!-- Floating "HELLO WORLD" quote that reacts to cursor -->
+  <div id="helloFloating">"HELLO WORLD"</div>
   
-  <!-- Three boxes at the bottom -->
+  <!-- The boxes underneath -->
   <div id="middleSection">
     <div id="middleBoxes">
       <div class="section-box">
@@ -308,7 +293,7 @@
   setTimeout(() => {
     document.getElementById('enterBtn').classList.add('show');
   }, 3000);
-  // Enter page transition
+  // Transition to main page
   document.getElementById('enterBtn').onclick = () => {
     document.getElementById('introContainer').style.transition = 'opacity 0.5s';
     document.getElementById('introContainer').style.opacity = 0;
@@ -328,32 +313,19 @@
     document.getElementById('mainContent').classList.remove('show');
   };
 
-  // Generate random "HELLO WORLD" string with random spacing
-  const messageCount = 50; // total repetitions
-  const baseMessage = 'HELLO WORLD';
-  let message = '';
-  for(let i=0; i<messageCount; i++) {
-    const randSpaces = ' '.repeat(Math.floor(Math.random() * 10 + 1));
-    message += baseMessage + randSpaces;
-  }
-  document.getElementById('helloText').textContent = message;
-
-  // Add glitch effect via CSS
-  const styleSheet = document.createElement("style");
-  styleSheet.innerText = `
-  @keyframes glitch {
-    0% { text-shadow: none; }
-    20% { text-shadow: 2px 0 red, -2px 0 blue; }
-    40% { text-shadow: -2px 0 red, 2px 0 blue; }
-    60% { text-shadow: none; }
-    80% { text-shadow: 1px 0 red, -1px 0 blue; }
-    100% { text-shadow: none; }
-  }
-  #helloText {
-    animation: scrollLeft 15s linear infinite, glitch 1s steps(2, start) infinite;
-  }
-  `;
-  document.head.appendChild(styleSheet);
+  // Cursor reactive movement for "HELLO WORLD" quote
+  const helloDiv = document.getElementById('helloFloating');
+  document.addEventListener('mousemove', (e) => {
+    const rect = helloDiv.getBoundingClientRect();
+    const centerX = rect.left + rect.width/2;
+    const centerY = rect.top + rect.height/2;
+    const dx = e.clientX - centerX;
+    const dy = e.clientY - centerY;
+    // Move slightly based on cursor distance
+    const moveX = dx * 0.01; // scale factor
+    const moveY = dy * 0.01;
+    helloDiv.style.transform = `translateX(calc(-50% + ${moveX}px)) translateY(${moveY}px)`;
+  });
 </script>
 
 </body>
