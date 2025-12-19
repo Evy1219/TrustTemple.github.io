@@ -122,7 +122,7 @@
   font-size: 2em; /* larger font size */
 }
 
-/* Box below "Who Am I?" with glow */
+/* Box below "Who Am I?" for updated content with glow */
 #nABoxContainer {
   width: 100%;
   display: flex;
@@ -139,80 +139,61 @@
   padding: 10px;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1em;
-  min-height: 80px;
+  min-height: 80px; /* Ensures enough space for your text */
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   text-align: center;
-  box-shadow: 0 0 15px #00FF00; /* glow effect */
+  box-shadow: 0 0 15px #00FF00; /* constant glow effect */
   transition: box-shadow 0.3s ease;
 }
 
-/* Middle boxes in triangle style */
+/* Centered middle boxes area */
 #middleBoxesContainer {
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
   padding: 20px 0;
 }
 #middleBoxes {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px; /* space between the top and bottom row */
-}
-
-/* Top box (Inspiration's!) in triangle style */
-#middleBoxes .top-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#middleBoxes .top-box .title-box {
-  background-color: #1a1a1a;
-  padding: 20px;
-  border-radius: 8px;
-  border: 2px solid #006400;
-  box-shadow: 0 0 15px #00FF00; /* glow effect */
-}
-#middleBoxes .top-box h3 {
-  margin: 0;
-  font-size: 2em;
-}
-
-/* Bottom row with Goals and Guides boxes */
-#bottom-boxes {
-  display: flex;
+  display: grid;
   gap: 20px;
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 900px;
+  width: 100%;
 }
-#bottom-boxes .box {
+.section-box {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 10px;
 }
-#bottom-boxes .box .title-box {
+.title-box {
   background-color: #1a1a1a;
   padding: 10px;
   border-radius: 8px;
   border: 2px solid #006400;
-  box-shadow: 0 0 15px #00FF00; /* glow effect */
-}
-#bottom-boxes .box h3 {
-  margin: 0;
-  font-size: 1.5em;
-}
-
-/* Hover glow effect for all boxes */
-.title-box {
+  text-align: center;
+  box-shadow: 0 0 10px #00FF00; /* initial glow */
   transition: box-shadow 0.3s ease;
 }
 .title-box:hover {
-  box-shadow: 0 0 20px #00FF00;
+  box-shadow: 0 0 20px #00FF00; /* glow on hover */
 }
-
-/* Footer and button styles remain unchanged */
+.content-box {
+  background-color: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #006400;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content-box p {
+  margin: 0;
+}
 #footer {
   background-color: #006400;
   padding: 15px;
@@ -234,7 +215,7 @@
   transition: box-shadow 0.3s;
 }
 #backBtn:hover {
-  box-shadow: 0 0 40px #0f0;
+  box-shadow: 0 0 40px #0f0; /* Slight glow on hover */
 }
 </style>
 </head>
@@ -271,25 +252,20 @@
       </div>
     </div>
 
-    <!-- Middle boxes in triangle style -->
-    <div id="middleBoxesContainer">
+    <!-- Centered middle boxes -->
+    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:20px 0;">
       <div id="middleBoxes">
-        <!-- Top Inspiration's box -->
-        <div class="top-box">
-          <div class="title-box">
-            <h3>Inspiration's!</h3>
-          </div>
+        <div class="section-box">
+          <div class="title-box"><h3>n/a</h3></div>
+          <div class="content-box"><p>n/a</p></div>
         </div>
-        <!-- Bottom row with Goals and Guides -->
-        <div id="bottom-boxes">
-          <div class="box">
-            <div class="title-box"><h3>Goals!</h3></div>
-            <div class="content-box" style="width:150px;"><p>My personal goals.</p></div>
-          </div>
-          <div class="box">
-            <div class="title-box"><h3>Guide's!</h3></div>
-            <div class="content-box" style="width:150px;"><p>Guides made by personal reflection</p></div>
-          </div>
+        <div class="section-box">
+          <div class="title-box"><h3>n/a</h3></div>
+          <div class="content-box"><p>n/a</p></div>
+        </div>
+        <div class="section-box">
+          <div class="title-box"><h3>n/a</h3></div>
+          <div class="content-box"><p>n/a</p></div>
         </div>
       </div>
     </div>
