@@ -3,20 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <title>Trust Temple</title>
+<!-- Use a pixel font for 64-bit style (Google Fonts) -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 <style>
   body {
-    margin: 0; padding: 0;
-    background: #000;
-    font-family: 'Press Start 2P', cursive;
-    color: #00FF00;
+    margin: 0;
+    padding: 0;
     height: 100vh;
-    overflow: hidden;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  /* Center container for intro title and buttons */
+  /* Intro container centered with pixel style */
 #introContainer {
   display: flex;
   flex-direction: column;
@@ -24,18 +27,20 @@
   justify-content: center;
   height: 100vh;
   text-align: center;
+  background-color: #000;
+  padding: 20px;
 }
 
+/* Trust Text with pixel style and animation */
 #trustText {
+  font-family: 'Press Start 2P', cursive;
   font-size: 3em;
+  color: #0f0;
   display: flex;
   gap: 10px;
   opacity: 0;
   animation: appearText 2s forwards;
   animation-delay: 0.5s;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
 }
 #trustText span {
   opacity: 0;
@@ -52,139 +57,106 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Buttons style and animation */
+/* Buttons styled with pixel font and 64-bit look */
 button {
   margin: 10px;
   padding: 15px 30px;
-  background: #00FF00;
+  background-color: #0f0; /* bright green */
   color: #000;
-  border: none;
+  border: 3px solid #0f0;
   border-radius: 8px;
-  font-family: 'Press Start 2P';
+  font-family: 'Press Start 2P', cursive;
   font-size: 1em;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 1s;
+  transition: all 0.3s;
 }
 button.show {
   opacity: 1;
 }
 
-/* Overlay for credits */
+/* Overlay for credits with pixel style */
 #creditsOverlay {
   display: none;
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background:#111;
-  color:#0f0;
-  font-size:1.5em;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-  padding:20px;
-  text-align:center;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(17,17,17,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 #creditsOverlay.show {
   display: flex;
 }
 #closeCredits {
-  margin-top:20px;
-  padding:10px 20px;
-  background:#00FF00;
-  color:#000;
-  border:none;
-  border-radius:8px;
-  font-family:'Press Start 2P';
-  font-size:1em;
-  cursor:pointer;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #0f0;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Press Start 2P';
+  font-size: 1em;
+  cursor: pointer;
 }
 
-/* Main page styling */
+/* Main page styling - centered content */
 #mainPage {
   display: none;
-  padding: 20px;
-  max-width: 900px;
-  margin: auto;
-  background: #111;
-  border: 4px solid #00FF00;
-  border-radius: 10px;
-  height: 100vh;
-  overflow:auto;
-  position: relative;
-  transition: opacity 1s ease;
-}
-#mainPage.show {
-  display: block;
-}
-#mainPage.hidden {
-  opacity: 0;
-}
-
-/* "Back" button on main page */
-#backMainBtn {
-  position: absolute;
-  top: 10px; right: 10px;
-  padding: 10px 15px;
-  background: #00FF00;
-  color:#000;
-  border:none;
-  border-radius:50%;
-  font-family:'Press Start 2P';
-  font-size:0.8em;
-  cursor:pointer;
-}
-
-/* Content boxes on main page */
-.box {
-  background: #222;
-  border: 2px solid #00FF00;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 8px;
-}
-#trustInfo {
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* Trust Temple info page (neat boxes, no pictures) */
-#trustPage {
-  display: none;
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
-  background: #222;
-  border: 4px solid #00FF00;
-  border-radius: 10px;
-  height: 100vh;
-  overflow:auto;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 40px;
+  height: 100vh;
+  width: 100%;
+  background-color: #111;
+  border: 4px solid #0f0;
+  box-sizing: border-box;
   position: relative;
+  overflow: auto;
 }
-#trustPage.show {
+#mainPage.show {
   display: flex;
 }
-#backToIntroBtn {
+#backMainBtn {
   position: absolute;
-  top: 10px; right: 10px;
+  top: 10px;
+  right: 10px;
   padding: 10px 15px;
-  background: #00FF00;
-  color:#000;
-  border:none;
-  border-radius:50%;
-  font-family:'Press Start 2P';
-  font-size:0.8em;
-  cursor:pointer;
+  background: #0f0;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  font-family: 'Press Start 2P';
+  font-size: 0.8em;
+  cursor: pointer;
+}
+#mainContent {
+  max-width: 700px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.box {
+  background: #222;
+  border: 2px solid #0f0;
+  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+h2 {
+  margin-top: 0;
+  text-align: center;
 }
 </style>
 </head>
 <body>
 
-<!-- Intro content centered -->
+<!-- Intro with pixel style font and centered -->
 <div id="introContainer">
   <div id="trustText">
     <span>T</span><span>r</span><span>u</span><span>s</span><span>t</span>
@@ -195,7 +167,7 @@ button.show {
   <button id="creditsBtn">Credits</button>
 </div>
 
-<!-- Credits overlay (hidden initially) -->
+<!-- Credits overlay -->
 <div id="creditsOverlay">
   <h2>Credits</h2>
   <p>Developed by Evan Maldonado</p>
@@ -205,10 +177,9 @@ button.show {
 <!-- Main page -->
 <div id="mainPage">
   <button id="backMainBtn">X</button>
-  <h1>Main Content</h1>
-  <div class="box" id="mainBox">
+  <div id="mainContent">
     <h2>Welcome to the Main Page</h2>
-    <p>This is your main page content. You can customize it further.</p>
+    <p>This is your main content. Customizable and neat.</p>
   </div>
 </div>
 
@@ -231,7 +202,7 @@ button.show {
 </div>
 
 <script>
-  // Animate "Trust Temple" words
+  // Animate "Trust Temple" text
   document.querySelectorAll('#trustText span').forEach((el, i) => {
     el.style.animationDelay = `${0.6 + i*0.2}s`;
   });
@@ -250,7 +221,7 @@ button.show {
     document.getElementById('creditsOverlay').classList.remove('show');
   };
 
-  // "Enter" button: show the Trust Temple info page
+  // "Enter" button: show Trust Temple info page
   document.getElementById('enterBtn').onclick = () => {
     document.getElementById('trustText').style.display='none';
     document.getElementById('enterBtn').style.display='none';
@@ -259,7 +230,7 @@ button.show {
     document.getElementById('trustPage').classList.add('show');
   };
 
-  // "Back" in Trust Temple info page
+  // "Back" button in Trust Temple page
   document.getElementById('backToIntroBtn').onclick = () => {
     document.getElementById('trustPage').classList.remove('show');
     document.getElementById('trustText').style.display='flex';
@@ -267,13 +238,12 @@ button.show {
     document.getElementById('creditsBtn').style.display='block';
   };
 
-  // "Back" in main page
+  // "Back" button in Main page
   document.getElementById('backMainBtn').onclick = () => {
     // Return to intro
     document.getElementById('trustText').style.display='flex';
     document.getElementById('enterBtn').style.display='block';
     document.getElementById('creditsBtn').style.display='block';
-    // Hide main page
     document.getElementById('mainPage').style.display='none';
   };
 </script>
