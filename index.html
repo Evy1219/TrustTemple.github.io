@@ -35,7 +35,7 @@
   gap: 10px;
   opacity: 0;
   animation: appearText 2s forwards;
-  color: #00FF00; /* Green color for Trust Temple text */
+  color: #00FF00;
 }
 #trustText span {
   opacity: 0;
@@ -50,7 +50,6 @@
 @keyframes bounceIn {
   to { opacity: 1; transform: translateY(0); }
 }
-/* Enter button styles */
 #enterBtn {
   margin-top: 30px;
   padding: 15px 30px;
@@ -72,15 +71,14 @@
   50% { box-shadow: 0 0 20px #0f0; }
   100% { box-shadow: 0 0 10px #0f0; }
 }
-
-/* Main content styles */
+/* Main styles */
 #mainContent {
   display: none;
   flex-direction: column;
   min-height: 100vh;
-  font-family: Arial, sans-serif;
   background-color: #0a0a0a;
   color: #fff;
+  font-family: Arial, sans-serif;
   position: relative;
 }
 #mainContent.show {
@@ -96,65 +94,21 @@
   font-size: 2em;
   font-family: Courier New;
 }
-#content {
-  flex: 1;
+/* Logo style */
+#logo {
+  text-align: center;
+  font-family:'Press Start 2P', cursive;
+  font-size:4em;
+  color:#00FF00;
+  margin:20px 0;
+  letter-spacing:2px;
+  text-shadow:0 0 10px #00FF00, 0 0 20px #00FF00;
+}
+/* Content layout */
+#middleSection {
   display: flex;
   flex-direction: column;
-}
-
-/* Top "Who Am I?" box - bigger and glowing */
-#topBoxContainer {
-  width: 100%;
-  padding: 10px 0;
-  background-color: #1a1a1a;
-}
-#topBoxContainer .title-box {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 20px; /* bigger padding for size */
-  border-radius: 8px;
-  border: 2px solid #006400;
-  text-align: center;
-  box-shadow: 0 0 15px #00FF00; /* constant glow effect */
-}
-#topBoxContainer .title-box h3 {
-  margin: 0;
-  font-size: 2em; /* larger font size */
-}
-
-/* Box below "Who Am I?" for updated content with glow */
-#nABoxContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  background-color: #1a1a1a;
-}
-#nABox {
-  max-width: 800px;
-  width: 90%;
-  background-color: #222;
-  border-radius: 8px;
-  border: 2px solid #006400;
-  padding: 10px;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 1em;
-  min-height: 80px; /* Ensures enough space for your text */
-  display: flex;
   align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-align: center;
-  box-shadow: 0 0 15px #00FF00; /* constant glow effect */
-  transition: box-shadow 0.3s ease;
-}
-
-/* Centered middle boxes area */
-#middleBoxesContainer {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 20px 0;
 }
 #middleBoxes {
@@ -175,11 +129,11 @@
   border-radius: 8px;
   border: 2px solid #006400;
   text-align: center;
-  box-shadow: 0 0 10px #00FF00; /* initial glow */
+  box-shadow: 0 0 10px #00FF00;
   transition: box-shadow 0.3s ease;
 }
 .title-box:hover {
-  box-shadow: 0 0 20px #00FF00; /* glow on hover */
+  box-shadow: 0 0 20px #00FF00;
 }
 .content-box {
   background-color: #1a1a1a;
@@ -206,16 +160,14 @@
   padding: 10px 15px;
   background: #0f0;
   border: none;
-  border-radius: 10px; /* Rounded rectangle */
-  box-shadow: 0 0 20px #0f0; /* Radiating glow */
+  border-radius: 10px;
+  box-shadow: 0 0 20px #0f0;
   font-family: 'Press Start 2P';
   font-size: 0.8em;
   cursor: pointer;
-  z-index: 1000;
-  transition: box-shadow 0.3s;
 }
 #backBtn:hover {
-  box-shadow: 0 0 40px #0f0; /* Slight glow on hover */
+  box-shadow: 0 0 40px #0f0;
 }
 </style>
 </head>
@@ -231,49 +183,46 @@
   <button id="enterBtn">Enter</button>
 </div>
 
-<!-- Main page -->
+<!-- Main content -->
 <div id="mainContent">
-  <!-- Back button styled as requested -->
   <button id="backBtn">Back</button>
   <div id="header">
     <h1>Trust Temple</h1>
   </div>
-  <main id="content">
-
-    <!-- Top "Who Am I?" box -->
-    <div id="topBoxContainer">
-      <div class="title-box"><h3>Who Am I ?</h3></div>
-    </div>
-
-    <!-- Updated content with your explanation -->
-    <div id="nABoxContainer">
-      <div id="nABox">
-        Hello, I am Evo. I chose this alias to simplify my name and share my journey. This website serves as my portfolio and personal showcase. I hope it resonates with the right viewers and offers insight into who I am and what I do.
+  
+  <!-- FANCY ASCII TEMPLE LOGO -->
+  <div id="logo">
+<pre style="margin:0; line-height:1.2;">
+      /\
+     /**\
+    /****\
+   /******\
+  /********\
+ /**Temple**\
+/************\
+|            |
+|    🏛️    |
+|____________|
+</pre>
+</div>
+  
+  <!-- Middle boxes in grid -->
+  <div id="middleSection">
+    <div id="middleBoxes">
+      <div class="section-box">
+        <div class="title-box"><h3>Goals!</h3></div>
+        <div class="content-box"><p>My personal goals.</p></div>
+      </div>
+      <div class="section-box">
+        <div class="title-box"><h3>Inspiration's!</h3></div>
+        <div class="content-box"><p>People, Things, or moments that shape me</p></div>
+      </div>
+      <div class="section-box">
+        <div class="title-box"><h3>Guide's!</h3></div>
+        <div class="content-box"><p>Guide's made by personal reflection</p></div>
       </div>
     </div>
-
-    <!-- Centered middle boxes -->
-    <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:20px 0;">
-      <div id="middleBoxes">
-        <div class="section-box">
-          <div class="title-box"><h3>Goals!</h3></div>
-          <div class="content-box"><p>Not like the soccer goal, My personal goals.</p></div>
-        </div>
-        <div class="section-box">
-          <div class="title-box"><h3>Inspiration's!</h3></div>
-          <div class="content-box"><p>People, Things, or moments that shape me</p></div>
-        </div>
-        <div class="section-box">
-          <div class="title-box"><h3>Guide's!</h3></div>
-          <div class="content-box"><p>Guide's made by personal reflection</p></div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-  <footer id="footer">
-    &copy; 2024 Trust Temple. All rights reserved.
-  </footer>
+  </div>
 </div>
 
 <script>
@@ -285,7 +234,7 @@
   setTimeout(() => {
     document.getElementById('enterBtn').classList.add('show');
   }, 3000);
-  // When "Enter" clicked, fade out intro and show main page
+  // Enter button click
   document.getElementById('enterBtn').onclick = () => {
     document.getElementById('introContainer').style.transition = 'opacity 0.5s';
     document.getElementById('introContainer').style.opacity = 0;
@@ -297,9 +246,8 @@
       }, 50);
     }, 500);
   };
-  // Back button to restart intro
+  // Back button
   document.getElementById('backBtn').onclick = () => {
-    // Show intro again
     document.getElementById('introContainer').style.display = 'flex';
     document.getElementById('introContainer').style.opacity = 1;
     document.getElementById('mainContent').style.display = 'none';
