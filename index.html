@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>TrustTemple - New Intro & Zero Buzz</title>
+<title>TrustTemple - Shatter & Transition</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 <style>
   body {
@@ -12,29 +12,28 @@
     color: #00FF00;
     height: 100vh;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
   }
 
-  /* Temple container for animation */
+  /* Temple container for intro */
 #templeContainer {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   height: 100vh;
   position: relative;
+  transform-origin: center center;
+  transition: transform 2s ease, opacity 2s ease;
 }
 
-/* Temple shape with animation */
+/* The temple triangle */
 #temple {
   width: 0; height: 0;
   border-left: 100px solid transparent;
   border-right: 100px solid transparent;
   border-bottom: 200px solid #00FF00;
-  margin: 0 auto;
   opacity: 0;
   animation: templeBuild 2s forwards;
 }
 
-/* The temple "base" (platform) after build */
+/* Base of the temple */
 #templeBase {
   width: 200px; height: 30px;
   background: #00FF00;
@@ -44,17 +43,28 @@
   animation-delay: 2s;
 }
 
+/* "Trust Temple" text inside the temple, initially hidden */
+#trustText {
+  position: absolute;
+  top: calc(50% - 20px);
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  opacity: 0;
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* Build animations for temple shape */
 @keyframes templeBuild {
   0% {opacity:0; transform: scale(0.5);}
   100% {opacity:1; transform: scale(1);}
 }
-
 @keyframes baseBuild {
   0% {opacity:0; transform: translateY(-20px);}
   100% {opacity:1; transform: translateY(0);}
 }
 
-/* Enter button fades in after temple build */
+/* Enter button */
 #enterBtn {
   display: none;
   margin-top: 30px;
@@ -71,21 +81,38 @@
   transition: opacity 1s;
 }
 
-/* Info display after buzz effect */
+/* Shatter effect for button */
+#enterBtn.shatter {
+  animation: shatterAnim 1s forwards;
+}
+
+@keyframes shatterAnim {
+  0% { transform: scale(1); opacity: 1; }
+  100% { 
+    transform: scale(2);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+/* Main page style */
 #mainPage {
   display: none;
   flex-direction: column;
   padding: 20px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
   background: #111;
   border: 4px solid #00FF00;
   border-radius: 10px;
   height: 100vh;
   position: relative;
+  overflow: auto;
+  transform: scale(0);
+  transition: transform 2s ease;
 }
 
-/* X button for main page */
+/* "X" close button in main page */
 #closeBtn {
   position: absolute;
   top: 10px;
@@ -101,9 +128,10 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 10;
 }
 
-/* Info boxes in main page */
+/* Info boxes */
 .infoBox {
   background: #222;
   border: 2px solid #00FF00;
@@ -113,44 +141,23 @@
   font-size: 0.9em;
 }
 
-/* Falling 1s and 0s for buzz effect */
-#buzzContainer {
-  position: fixed;
-  top:0; left:0; width:100%; height:100%;
-  pointer-events: none;
-  z-index: 9999;
-}
-.digit {
-  position: absolute;
-  font-family: monospace;
-  font-size: 8px;
-  color: #0f0;
-  opacity: 0.8;
-  animation: fallBuzz 1s forwards;
-}
-
-@keyframes fallBuzz {
-  0% {
-    transform: translateY(0);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
+/* The scene zooms into main page after transition */
+#mainPage.zoom-in {
+  transform: scale(1);
 }
 </style>
 </head>
 <body>
 
-<!-- Temple build animation -->
+<!-- Intro with temple -->
 <div id="templeContainer">
   <div id="temple"></div>
   <div id="templeBase"></div>
+  <div id="trustText">Trust Temple</div>
   <button id="enterBtn">Enter</button>
 </div>
 
-<!-- Main page with info boxes -->
+<!-- Main page -->
 <div id="mainPage">
   <button id="closeBtn">X</button>
   <h1>TrustTemple</h1>
@@ -160,73 +167,58 @@
   <div class="infoBox">Random info 4: 64-bit style is cool.</div>
 </div>
 
-<!-- Buzz container for falling 1's and 0's -->
-<div id="buzzContainer"></div>
-
 <script>
   const temple = document.getElementById('temple');
   const base = document.getElementById('templeBase');
+  const trustText = document.getElementById('trustText');
   const enterBtn = document.getElementById('enterBtn');
   const mainPage = document.getElementById('mainPage');
   const closeBtn = document.getElementById('closeBtn');
-  const buzzContainer = document.getElementById('buzzContainer');
+  const container = document.getElementById('templeContainer');
 
-  // Animate temple build
+  // Show "Enter" after temple build
   setTimeout(() => {
-    // Show "Enter" button after build
     enterBtn.style.display = 'block';
-    setTimeout(() => {
-      enterBtn.style.opacity = 1;
-    }, 100);
-  }, 3000); // wait for build
+    setTimeout(() => { enterBtn.style.opacity=1; }, 50);
+  }, 3000);
 
-  // On Enter click
+  // On Enter click: shatter button, show trust words, zoom into main
   document.getElementById('enterBtn').onclick = () => {
-    // Animate temple into trust shape (simulate by scaling)
-    temple.style.transform = 'scale(0.8)';
-    base.style.transform = 'translateY(10px)';
-    // Fade in buzz
+    // Shatter button
+    enterBtn.classList.add('shatter');
+
+    // After shatter animation, show "Trust Temple" text
     setTimeout(() => {
-      triggerBuzz();
-      // Transition to main page after buzz
-      setTimeout(() => {
-        document.getElementById('templeContainer').style.display='none';
-        document.getElementById('mainPage').style.display='flex';
-        closeBtn.style.display='block';
-      }, 1500);
-    }, 1500);
-  };
+      trustText.style.opacity = 1;
+    }, 1000);
 
-  // Close main page
-  closeBtn.onclick = () => {
-    document.getElementById('mainPage').style.display='none';
-    document.getElementById('templeContainer').style.display='flex';
-    // Reset scale
-    temple.style.transform = 'scale(1)';
-    base.style.transform = 'translateY(0)';
-  };
+    // Animate scene zoom
+    container.style.transition = 'transform 2s ease, opacity 2s ease';
+    container.style.transform = 'scale(0)';
 
-  // Generate buzz of falling 1's and 0's
-  function triggerBuzz() {
-    for (let i=0; i<100; i++) {
-      const div = document.createElement('div');
-      div.className = 'digit';
-      div.textContent = Math.random() > 0.5 ? '1' : '0';
-      div.style.top = Math.random() * window.innerHeight + 'px';
-      div.style.left = Math.random() * window.innerWidth + 'px';
-      div.style.fontSize = (Math.random() * 4 + 4) + 'px';
-      buzzContainer.appendChild(div);
-      // Animate falling
+    // After zoom, show main page
+    setTimeout(() => {
+      document.getElementById('templeContainer').style.display = 'none';
+      mainPage.style.display = 'flex';
+      mainPage.classList.add('zoom-in');
+      // Animate zoom in
       setTimeout(() => {
-        div.style.transform = 'translateY(100vh)';
-        div.style.opacity = '0';
+        mainPage.style.transform = 'scale(1)';
       }, 50);
-      // Remove element after animation
-      setTimeout(() => {
-        div.remove();
-      }, 1050);
-    }
-  }
+      // Show close button
+      closeBtn.style.display = 'block';
+    }, 2000);
+  };
+
+  // Close button to go back to intro
+  document.getElementById('closeBtn').onclick = () => {
+    mainPage.style.display='none';
+    document.getElementById('templeContainer').style.display='flex';
+    // Reset trust text
+    trustText.style.opacity=0;
+    // Reset scene scale
+    container.style.transform='scale(1)';
+  };
 </script>
 
 </body>
