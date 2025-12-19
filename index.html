@@ -133,23 +133,22 @@
   text-align: center;
 }
 
-/* Floating quote "HELLO WORLD" that reacts to cursor, positioned above middle boxes */
+/* Floating "HELLO WORLD" quote, positioned in the space between "Who Am I" and boxes */
 #helloFloating {
   position: absolute;
-  top: 250px; /* position in the space between "Who Am I" and boxes */
+  top: 330px; /* moved further down to avoid overlap */
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Orbitron', sans-serif;
   font-size: 2em;
   color: #00FF00;
   white-space: nowrap;
-  padding: 10px 20px;
+  padding: 8px 16px; /* smaller padding for closer borders */
   border-radius: 8px;
-  border: 2px solid #00FF00;
+  border: 2px solid #00FF00; /* borders closer to text */
   background: transparent;
   user-select: none;
   cursor: default;
-  /* Unique style with quotes via pseudo-elements */
 }
 #helloFloating::before,
 #helloFloating::after {
@@ -253,7 +252,7 @@
     </div>
   </div>
   
-  <!-- Floating "HELLO WORLD" quote -->
+  <!-- Floating "HELLO WORLD" quote positioned in the space -->
   <div id="helloFloating">"HELLO WORLD"</div>
   
   <!-- The boxes underneath -->
@@ -304,7 +303,7 @@
     document.getElementById('mainContent').classList.remove('show');
   };
 
-  // Cursor movement reactive effect for "HELLO WORLD" quote
+  // Cursor reactive movement for "HELLO WORLD" quote
   const helloDiv = document.getElementById('helloFloating');
   document.addEventListener('mousemove', (e) => {
     const rect = helloDiv.getBoundingClientRect();
