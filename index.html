@@ -7,6 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
 <!-- Pixel font for other parts -->
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<!-- Digital font for clock -->
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
 <style>
   body {
     margin: 0;
@@ -95,6 +97,66 @@
   margin: 0;
   font-size: 2em;
   font-family: Courier New;
+}
+
+/* Top navigation area */
+#topNav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+/* World Clock Container */
+#worldClock {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  z-index: 100;
+}
+
+#clockTime {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2em;
+  color: #00FF00;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: 2px solid #00FF00;
+  box-shadow: 0 0 10px #00FF00;
+  text-shadow: 0 0 5px #00FF00;
+  letter-spacing: 1px;
+}
+
+#clockDate {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9em;
+  color: #00FF00;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #00FF00;
+  box-shadow: 0 0 8px #00FF00;
+  text-shadow: 0 0 3px #00FF00;
+  letter-spacing: 0.5px;
+}
+
+/* Clock blinking colon animation */
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 /* "Who Am I" section */
@@ -314,6 +376,7 @@
   box-shadow: 0 0 20px #0f0;
   font-family: 'Press Start 2P';
   font-size: 0.8em;
+  z-index: 100;
 }
 #backBtn:hover {
   box-shadow: 0 0 40px #0f0;
@@ -334,7 +397,14 @@
 
 <!-- Main page -->
 <div id="mainContent">
-  <button id="backBtn">Back</button>
+  <div id="topNav">
+    <button id="backBtn">Back</button>
+    <div id="worldClock">
+      <div id="clockTime">EST: 00:00:00</div>
+      <div id="clockDate">January 1, 2023</div>
+    </div>
+  </div>
+  
   <div id="header">
     <h1>Trust Temple</h1>
   </div>
@@ -410,6 +480,35 @@
     const moveY = dy * 0.005;
     helloDiv.style.transform = `translateX(-50%) translateX(${moveX}px) translateY(${moveY}px)`;
   });
+
+  // World Clock Functionality
+  function updateWorldClock() {
+    // Get current UTC time
+    const now = new Date();
+    
+    // Convert to EST (UTC-5 for standard time, UTC-4 for daylight saving)
+    // Simple EST conversion (doesn't account for DST changes)
+    const estOffset = -5; // EST is UTC-5
+    const estTime = new Date(now.getTime() + (estOffset * 60 * 60 * 1000));
+    
+    // Format time
+    const hours = estTime.getUTCHours().toString().padStart(2, '0');
+    const minutes = estTime.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = estTime.getUTCSeconds().toString().padStart(2, '0');
+    
+    // Format date
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = estTime.toLocaleDateString('en-US', options);
+    
+    // Update display with blinking colon
+    const colon = seconds % 2 === 0 ? ':' : '<span class="blink">:</span>';
+    document.getElementById('clockTime').innerHTML = `EST: ${hours}${colon}${minutes}${colon}${seconds}`;
+    document.getElementById('clockDate').textContent = dateStr;
+  }
+
+  // Initialize and update clock every second
+  updateWorldClock();
+  setInterval(updateWorldClock, 1000);
 </script>
 
 </body>
