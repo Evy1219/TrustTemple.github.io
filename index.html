@@ -110,14 +110,37 @@
   margin: 0 auto;
   max-width: 800px;
   padding: 20px;
-  border-radius: 8px;
-  border: 2px solid #006400;
   text-align: center;
   box-shadow: 0 0 15px #00FF00;
+  
+  /* Diagonal cut corners */
+  position: relative;
+  background: #1a1a1a;
+  border: 2px solid #006400;
 }
-#topBoxContainer h3 {
-  margin: 0;
-  font-size: 2em;
+
+#topBoxContainer .title-box::before,
+#topBoxContainer .title-box::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00FF00;
+  background: #1a1a1a;
+}
+
+#topBoxContainer .title-box::before {
+  top: -10px;
+  left: -10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+#topBoxContainer .title-box::after {
+  bottom: -10px;
+  right: -10px;
+  border-left: none;
+  border-top: none;
 }
 
 /* "Who Am I" message box */
