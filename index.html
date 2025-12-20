@@ -191,19 +191,19 @@
 #middleBoxes {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  max-width: 1200px; /* Increased max-width for more spacing */
+  max-width: 1400px; /* Increased max-width for more spacing */
   width: 100%;
-  gap: 0; /* Remove gap to control spacing manually */
+  gap: 0;
 }
 .section-box {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center align each column */
+  align-items: center;
   justify-content: flex-start;
 }
 .title-box {
   background-color: #1a1a1a;
-  padding: 15px 25px; /* Increased horizontal padding */
+  padding: 15px 25px;
   border-radius: 8px;
   border: 2px solid #006400;
   text-align: center;
@@ -214,12 +214,12 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-  width: 250px; /* Fixed width for consistent sizing */
+  width: 250px; /* Title box width */
 }
 .title-box h3 {
   margin: 0;
   font-size: 0.9em;
-  white-space: nowrap; /* Prevent text wrapping */
+  white-space: nowrap;
 }
 .title-box:hover {
   box-shadow: 0 0 20px #00FF00;
@@ -236,14 +236,15 @@
   position: relative;
   border: 2px solid #666;
   box-shadow: 0 0 10px #666;
-  width: 250px; /* Same width as title boxes */
-  margin-top: 5px; /* Small gap between title and content */
+  width: 350px; /* WIDER width for description boxes (was 250px) */
+  margin-top: 5px;
 }
 .content-box p {
   margin: 0;
   font-size: 0.8em;
   text-align: center;
   line-height: 1.4;
+  width: 100%; /* Ensure text uses full width */
 }
 
 /* Grey notched corners for content boxes */
@@ -274,20 +275,20 @@
 /* Position each column with different spacing */
 #middleBoxes .section-box:nth-child(1) {
   /* Goals - left column */
-  margin-right: auto; /* Push to left */
-  margin-left: 50px; /* Add left margin */
+  margin-right: auto;
+  margin-left: 30px; /* Adjusted left margin */
 }
 
 #middleBoxes .section-box:nth-child(2) {
   /* Inspiration's - center column */
   margin-left: auto;
-  margin-right: auto; /* Center it */
+  margin-right: auto;
 }
 
 #middleBoxes .section-box:nth-child(3) {
   /* Guide's - right column */
-  margin-left: auto; /* Push to right */
-  margin-right: 50px; /* Add right margin */
+  margin-left: auto;
+  margin-right: 30px; /* Adjusted right margin */
 }
 
 #footer {
