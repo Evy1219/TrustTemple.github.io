@@ -10,10 +10,15 @@
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+
+<img src="images2.jpg.png" alt="Side Image" class="side-image left-image">
+<img src="images2.jpg.png" alt="Side Image" class="side-image right-image">
+
 <div id="mainContent" class="show">
   <button id="backBtn">Back to Home</button>
   <div id="header">
-    <h1>Inspirations</h1>
+    <h1>Inspirations Page</h1>
     <div id="worldClock">
       <div id="clockTime">EST: 00:00:00</div>
       <div id="clockDate">January 1, 2023</div>
@@ -22,14 +27,65 @@
   <div id="topBoxContainer">
     <div class="title-box"><h3>My Inspirations</h3></div>
     <div id="whoAmIBox">
-      List your inspirations here. For example:<br>
-      - Terry A. Davis<br>
-      - Ricky A. Kasso<br>
-      Add more details as needed.
+      <div class="inspiration-section" style="margin-bottom: 32px;">
+        <div style="display:flex; flex-direction:column; align-items:center;">
+          <svg width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:-4px;">
+            <!-- Radiating lines -->
+            <g>
+              <line x1="24" y1="2" x2="24" y2="10" stroke="#00FF00" stroke-width="2" stroke-linecap="round"/>
+              <line x1="12" y1="6" x2="8" y2="2" stroke="#00FF00" stroke-width="2" stroke-linecap="round"/>
+              <line x1="36" y1="6" x2="40" y2="2" stroke="#00FF00" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <polygon points="4,28 12,10 24,24 36,10 44,28" stroke="#00FF00" stroke-width="3" fill="none"/>
+            <circle cx="12" cy="10" r="3" fill="#00FF00"/>
+            <circle cx="24" cy="24" r="3" fill="#00FF00"/>
+            <circle cx="36" cy="10" r="3" fill="#00FF00"/>
+          </svg>
+          <h3 style="color:#00FF00; margin-top:0; margin-bottom:8px; text-align:center;">My Dad</h3>
+          <div class="glow-box" style="margin-top:8px; text-align:center;">
+            <p style="font-size:1.1em; margin:0;">The person who is truly subconsciously shaping me as a man and father is my own father. If it weren't for him, I wouldn't have as much knowledge about basic life necessities and responsibilities. He also was the person to introduce me to the computer world and everything I do from a singular keystroke gives me a reminder of where and who helped me get where I am. Thank you Dad. I love you.</p>
+          </div>
+          <div id="spockQuotes" class="spock-quotes" style="margin-top:36px;"></div>
+          <div class="animated-green-line" style="margin:32px auto 0 auto;"></div>
+        </div>
+      </div>
     </div>
   </div>
+
 </div>
+<footer class="page-footer">
+  <div class="footer-content">
+    <span>&copy; 2025 Trust Temple. All rights reserved.</span>
+    <span style="margin-left:18px;">Made with Evos brain.</span>
+  </div>
+</footer>
 <script>
+
+// Animated Spock quotes
+const spockQuotesArr = [
+  {quote: "Live long and prosper.", who: "Spock"},
+  {quote: "Insufficient facts always invite danger.", who: "Spock"},
+  {quote: "Change is the essential process of all existence.", who: "Spock"},
+  {quote: "Logic is the beginning of wisdom, not the end.", who: "Spock"},
+  {quote: "The needs of the many outweigh the needs of the few.", who: "Spock"},
+  {quote: "I have been, and always shall be, your friend.", who: "Spock"},
+  {quote: "After a time, you may find that having is not so pleasing a thing after all as wanting.", who: "Spock"}
+];
+let quoteIdx = 0;
+function showSpockQuote() {
+  const quoteDiv = document.getElementById('spockQuotes');
+  if (!quoteDiv) return;
+  const q = spockQuotesArr[quoteIdx];
+  quoteDiv.innerHTML = `<span class="spock-quote">“${q.quote}”</span><span class="spock-who"> - ${q.who}</span>`;
+  quoteDiv.classList.remove('fade-in');
+  void quoteDiv.offsetWidth; // trigger reflow for animation
+  quoteDiv.classList.add('fade-in');
+  quoteIdx = (quoteIdx + 1) % spockQuotesArr.length;
+}
+showSpockQuote();
+setInterval(showSpockQuote, 5200);
+// Add Vulcan Salute SVGs to each side
+
   document.getElementById('backBtn').onclick = function() {
     localStorage.setItem('skipIntro', 'true');
     window.location.href = 'index.html';
