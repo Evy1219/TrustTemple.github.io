@@ -1,3 +1,21 @@
+@media (max-width: 600px) {
+  #mainContent {
+    padding: 8px;
+  }
+  #header h1 {
+    font-size: 1.2em;
+  }
+  .title-box, .content-box {
+    width: 95vw;
+    max-width: 100%;
+    font-size: 0.9em;
+    padding: 10px;
+  }
+  #whoAmIBox {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+}
 /* TRUST THE TEMPLE banner under header */
 #trustTempleBanner {
   display: block;
