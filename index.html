@@ -9,400 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
 <!-- Digital font for clock -->
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family:'Press Start 2P', cursive;
-    background-color: #000;
-    color: #fff;
-    height: 100vh;
-    overflow: hidden;
-    transform-origin: 0 0; /* Set base transform origin */
-  }
-
-  /* Intro container styles */
-#introContainer {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 10;
-  transition: opacity 0.5s ease;
-  transform-origin: center center; /* Center origin for intro */
-}
-#trustText {
-  font-size: 3em;
-  display: flex;
-  gap: 10px;
-  opacity: 0;
-  animation: appearText 2s forwards;
-  color: #00FF00;
-  transform-origin: center center; /* Center origin for animation */
-}
-#trustText span {
-  opacity: 0;
-  transform: translateY(-50px);
-  animation: bounceIn 1s forwards;
-  transform-origin: center center; /* Center origin for each letter */
-}
-#trustText span:nth-child(1) { animation-delay: 0.6s; }
-#trustText span:nth-child(2) { animation-delay: 0.8s; }
-@keyframes appearText {
-  to { opacity: 1; }
-}
-@keyframes bounceIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-#enterBtn {
-  margin-top: 30px;
-  padding: 15px 30px;
-  background-color: #0f0;
-  border: 3px solid #0f0;
-  border-radius: 8px;
-  font-family: 'Press Start 2P';
-  font-size: 1em;
-  cursor: pointer;
-  opacity: 0;
-  transition: all 0.3s;
-  transform-origin: center center; /* Center origin for button */
-}
-#enterBtn.show {
-  opacity: 1;
-  animation: pulse 1s infinite;
-}
-@keyframes pulse {
-  0% { box-shadow: 0 0 10px #0f0; }
-  50% { box-shadow: 0 0 20px #0f0; }
-  100% { box-shadow: 0 0 10px #0f0; }
-}
-/* Main styles */
-#mainContent {
-  display: none;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #0a0a0a;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  position: relative;
-  transform-origin: 0 0; /* Top-left origin for main content */
-}
-#mainContent.show {
-  display: flex;
-}
-#header {
-  background-color: #006400;
-  padding: 20px;
-  text-align: center;
-  position: relative; /* Added for clock positioning */
-  transform-origin: center top; /* Center-top origin for header */
-}
-#header h1 {
-  margin: 0;
-  font-size: 2em;
-  font-family: Courier New;
-  transform-origin: center center; /* Center origin for title */
-}
-
-/* World Clock Container - Inside Header */
-#worldClock {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
-  transform-origin: right center; /* Right-center origin for clock positioning */
-}
-
-#clockTime {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 1em;
-  color: #00FF00;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 5px 10px;
-  border-radius: 6px;
-  border: 1px solid #00FF00;
-  box-shadow: 0 0 8px #00FF00;
-  text-shadow: 0 0 4px #00FF00;
-  letter-spacing: 1px;
-  transform-origin: right center; /* Right-center origin for time display */
-}
-
-#clockDate {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.7em;
-  color: #00FF00;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #00FF00;
-  box-shadow: 0 0 6px #00FF00;
-  text-shadow: 0 0 3px #00FF00;
-  letter-spacing: 0.5px;
-  transform-origin: right center; /* Right-center origin for date display */
-}
-
-/* Clock blinking colon animation */
-.blink {
-  animation: blink 1s infinite;
-  transform-origin: center center; /* Center origin for blinking animation */
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-/* "Who Am I" section */
-#topBoxContainer {
-  width: 100%;
-  padding: 10px 0;
-  background-color: #1a1a1a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform-origin: center top; /* Center-top origin for container */
-}
-#topBoxContainer .title-box {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 0 15px #00FF00;
-  
-  /* Smooth rounded corners */
-  position: relative;
-  background: #1a1a1a;
-  border: 2px solid #006400;
-  border-radius: 15px; /* Added border-radius for smooth corners */
-  transform-origin: center center; /* Center origin for title box */
-}
-
-#topBoxContainer .title-box::before,
-#topBoxContainer .title-box::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #00FF00;
-  background: #1a1a1a;
-  border-radius: 5px; /* Added border-radius for smooth corners */
-  transform-origin: center center; /* Center origin for corner accents */
-}
-
-#topBoxContainer .title-box::before {
-  top: -10px;
-  left: -10px;
-  border-right: none;
-  border-bottom: none;
-  border-top-left-radius: 8px; /* Smooth top-left corner */
-  transform-origin: top left; /* Top-left origin for top-left corner */
-}
-
-#topBoxContainer .title-box::after {
-  bottom: -10px;
-  right: -10px;
-  border-left: none;
-  border-top: none;
-  border-bottom-right-radius: 8px; /* Smooth bottom-right corner */
-  transform-origin: bottom right; /* Bottom-right origin for bottom-right corner */
-}
-
-/* "Who Am I" message box */
-#whoAmIBox {
-  margin-top: 10px;
-  max-width: 800px;
-  padding: 20px;
-  border-radius: 8px;
-  border: 2px solid #006400;
-  background-color: #222;
-  box-shadow: 0 0 15px #00FF00;
-  font-size: 1.2em;
-  text-align: center;
-  transform-origin: center center; /* Center origin for message box */
-}
-
-/* Floating "HELLO WORLD" quote, positioned in the space */
-#helloFloating {
-  position: absolute;
-  top: 330px; /* position in the space between "Who Am I" and boxes */
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Orbitron', sans-serif;
-  font-size: 2em;
-  color: #00FF00;
-  white-space: nowrap;
-  padding: 8px 16px; /* smaller padding for closer borders */
-  border-radius: 8px;
-  border: 2px solid #00FF00; /* borders closer to text */
-  background: transparent;
-  user-select: none;
-  transform-origin: center center; /* Center origin for floating text */
-}
-
-/* Animate scrolling for the main content boxes */
-#middleSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-  margin-top: 200px; /* moved further down to make space for floating quote */
-  transform-origin: center top; /* Center-top origin for middle section */
-}
-#middleBoxes {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  max-width: 1400px; /* Increased max-width for more spacing */
-  width: 100%;
-  gap: 0;
-  transform-origin: center center; /* Center origin for grid */
-}
-.section-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  transform-origin: center center; /* Center origin for each section */
-}
-.title-box {
-  background-color: #1a1a1a;
-  padding: 15px 25px;
-  border-radius: 8px;
-  border: 2px solid #006400;
-  text-align: center;
-  box-shadow: 0 0 10px #00FF00;
-  transition: box-shadow 0.3s ease;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-  width: 250px; /* Title box width */
-  transform-origin: center center; /* Center origin for title boxes */
-}
-.title-box h3 {
-  margin: 0;
-  font-size: 0.9em;
-  white-space: nowrap;
-  transform-origin: center center; /* Center origin for title text */
-}
-.title-box:hover {
-  box-shadow: 0 0 20px #00FF00;
-}
-.content-box {
-  background-color: #1a1a1a;
-  padding: 15px;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  /* Grey notched borders - same style as "Who Am I" title box */
-  position: relative;
-  border: 2px solid #666;
-  box-shadow: 0 0 10px #666;
-  width: 350px; /* WIDER width for description boxes (was 250px) */
-  margin-top: 5px;
-  transform-origin: center center; /* Center origin for content boxes */
-}
-.content-box p {
-  margin: 0;
-  font-size: 0.8em;
-  text-align: center;
-  line-height: 1.4;
-  width: 100%; /* Ensure text uses full width */
-  transform-origin: center center; /* Center origin for content text */
-}
-
-/* Grey notched corners for content boxes */
-.content-box::before,
-.content-box::after {
-  content: '';
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  border: 2px solid #888;
-  background: #1a1a1a;
-  border-radius: 4px; /* Added border-radius for smooth corners */
-  transform-origin: center center; /* Center origin for corner accents */
-}
-
-.content-box::before {
-  top: -10px;
-  left: -10px;
-  border-right: none;
-  border-bottom: none;
-  border-top-left-radius: 6px; /* Smooth top-left corner */
-  transform-origin: top left; /* Top-left origin for top-left corner */
-}
-
-.content-box::after {
-  bottom: -10px;
-  right: -10px;
-  border-left: none;
-  border-top: none;
-  border-bottom-right-radius: 6px; /* Smooth bottom-right corner */
-  transform-origin: bottom right; /* Bottom-right origin for bottom-right corner */
-}
-
-/* Position each column with different spacing */
-#middleBoxes .section-box:nth-child(1) {
-  /* Goals - left column */
-  margin-right: auto;
-  margin-left: 30px; /* Adjusted left margin */
-  transform-origin: left center; /* Left-center origin for left column */
-}
-
-#middleBoxes .section-box:nth-child(2) {
-  /* Inspiration's - center column */
-  margin-left: auto;
-  margin-right: auto;
-  transform-origin: center center; /* Center origin for center column */
-}
-
-#middleBoxes .section-box:nth-child(3) {
-  /* Guide's - right column */
-  margin-left: auto;
-  margin-right: 30px; /* Adjusted right margin */
-  transform-origin: right center; /* Right-center origin for right column */
-}
-
-#footer {
-  background-color: #006400;
-  padding: 15px;
-  text-align: center;
-  transform-origin: center bottom; /* Center-bottom origin for footer */
-}
-#backBtn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 10px 15px;
-  background: #0f0;
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #0f0;
-  font-family: 'Press Start 2P';
-  font-size: 0.8em;
-  z-index: 100;
-  transform-origin: top left; /* Top-left origin for back button */
-}
-#backBtn:hover {
-  box-shadow: 0 0 40px #0f0;
-}
-
-/* Universal text scaling rule */
-h1, h2, h3, h4, h5, h6, p, span, div, button, a {
-  transform-origin: inherit; /* Inherit transform-origin from parent */
-}
-</style>
+<!-- Link to external CSS -->
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -438,12 +46,14 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, a {
   
   <!-- Floating "HELLO WORLD" quote in the space below "Who Am I" -->
   <div id="helloFloating">"HELLO WORLD"</div>
+  <div id="topLine" class="line"></div>
+<div id="bottomLine" class="line"></div>
   
   <!-- The boxes underneath, moved further down -->
   <div id="middleSection">
     <div id="middleBoxes">
       <div class="section-box">
-        <div class="title-box"><h3>Goals!</h3></div>
+        <div class="title-box" onclick="window.location.href='goals.html'" style="cursor: pointer;"><h3>Goals!</h3></div>
         <div class="content-box"><p>My personal goals are goals that are very important to me. Goals can range from the average human goal, including being the richest in the family. Things like that aren't realistic if you're not doing things like making your own Trust Temple like I am. Click the goals button above to embark on my psychological goal process and listings.</p></div>
       </div>
       <div class="section-box">
@@ -454,11 +64,35 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, a {
         <div class="title-box"><h3>Guide's!</h3></div>
         <div class="content-box"><p>Guides are made by personal reflection for your advantage, but this will only reside to people that are followers of my personal beliefs about life and other systems.</p></div>
       </div>
+      <!-- Grouped N/A boxes below with gap -->
+    </div>
+    <div id="bottomBoxes" style="margin-top: 60px; display: flex; justify-content: center; gap: 40px;">
+      <div class="section-box">
+        <div class="title-box"><h3>N/A</h3></div>
+        <div class="content-box"><p>N/A</p></div>
+      </div>
+      <div class="section-box">
+        <div class="title-box"><h3>N/A</h3></div>
+        <div class="content-box"><p>N/A</p></div>
+      </div>
+      <div class="section-box">
+        <div class="title-box"><h3>N/A</h3></div>
+        <div class="content-box"><p>N/A</p></div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
+    // On page load, check if we should skip intro
+    window.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('skipIntro') === 'true') {
+        document.getElementById('introContainer').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'flex';
+        document.getElementById('mainContent').classList.add('show');
+        localStorage.removeItem('skipIntro');
+      }
+    });
   // Animate trust text
   document.querySelectorAll('#trustText span').forEach((el, i) => {
     el.style.animationDelay = `${0.6 + i*0.2}s`;
@@ -481,10 +115,18 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, a {
   };
   // Back button
   document.getElementById('backBtn').onclick = () => {
-    document.getElementById('introContainer').style.display = 'flex';
-    document.getElementById('introContainer').style.opacity = 1;
-    document.getElementById('mainContent').style.display = 'none';
-    document.getElementById('mainContent').classList.remove('show');
+    // If coming from another page, skip intro
+    if (localStorage.getItem('skipIntro') === 'true') {
+      document.getElementById('introContainer').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'flex';
+      document.getElementById('mainContent').classList.add('show');
+      localStorage.removeItem('skipIntro');
+    } else {
+      document.getElementById('introContainer').style.display = 'flex';
+      document.getElementById('introContainer').style.opacity = 1;
+      document.getElementById('mainContent').style.display = 'none';
+      document.getElementById('mainContent').classList.remove('show');
+    }
   };
 
   // Cursor reactive movement for "HELLO WORLD" quote
