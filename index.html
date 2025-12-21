@@ -28,6 +28,9 @@
 <!-- Main page -->
 <div id="mainContent">
   <button id="backBtn">Back</button>
+  <div style="display:flex;justify-content:center;margin:12px 0 0 0;">
+    <button id="doNotTouchBtn" style="padding:4px 12px;font-size:0.92em;background:#222;color:#FF0000;border:2px solid #FF0000;border-radius:8px;box-shadow:0 0 4px #FF0000;cursor:pointer;font-family:'Orbitron', 'Share Tech Mono', monospace;">Do Not Touch</button>
+  </div>
   
   <div id="header">
     <div class="header-symbol left-symbol">
@@ -111,6 +114,88 @@
 </div>
 
 <script>
+
+    // Do Not Touch button logic
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('doNotTouchBtn');
+      if (btn) {
+        btn.onclick = function() {
+          document.body.innerHTML = `
+            <div id="idiotContainer" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;">
+              <div id="idiotText" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3em;color:#fff;font-family:'Orbitron','Share Tech Mono',monospace;text-align:center;animation:glowidiot 1.2s infinite alternate;">You are an idiot</div>
+            </div>
+            <style>
+              @keyframes pop {
+                0% { opacity: 0; transform: scale(0.5); }
+                60% { opacity: 1; transform: scale(1.2); }
+                100% { opacity: 1; transform: scale(1); }
+              }
+              @keyframes glowidiot {
+                0% { color: #fff; text-shadow: 0 0 0 #fff, 0 0 0 #FF0000; }
+                50% { color: #FF0000; text-shadow: 0 0 18px #FF0000, 0 0 32px #fff; }
+                100% { color: #fff; text-shadow: 0 0 0 #fff, 0 0 0 #FF0000; }
+              }
+            </style>
+          `;
+          fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+              let ipCount = 0;
+              let positions = [];
+              function randomPos() {
+                // Avoid center 30% both ways
+                let left, top;
+                do {
+                  left = Math.random() * 100;
+                  top = Math.random() * 100;
+                } while (left > 35 && left < 65 && top > 35 && top < 65);
+                return {left, top};
+              }
+              function overlaps(newPos) {
+                return positions.some(pos => Math.abs(pos.left-newPos.left)<8 && Math.abs(pos.top-newPos.top)<6);
+              }
+              function addIP() {
+                let pos;
+                let tries = 0;
+                do {
+                  pos = randomPos();
+                  tries++;
+                } while (overlaps(pos) && tries < 20);
+                positions.push(pos);
+                const ipDiv = document.createElement('div');
+                ipDiv.textContent = data.ip;
+                ipDiv.style.position = 'absolute';
+                ipDiv.style.left = pos.left+'vw';
+                ipDiv.style.top = pos.top+'vh';
+                ipDiv.style.transform = 'translate(-50%,-50%)';
+                // Fade color from red to white
+                const frac = (ipCount % 20) / 20;
+                const r = 255, g = Math.round(255 * frac), b = Math.round(255 * frac);
+                ipDiv.style.color = `rgb(${r},${g},${b})`;
+                ipDiv.style.fontFamily = "'Orbitron','Share Tech Mono',monospace";
+                ipDiv.style.fontSize = '1.2em';
+                ipDiv.style.animation = `pop 1.2s both`;
+                document.getElementById('idiotContainer').appendChild(ipDiv);
+                ipCount++;
+                if (ipCount < 100) setTimeout(addIP, 600);
+              }
+              addIP();
+            })
+            .catch(() => {
+              const ipDiv = document.createElement('div');
+              ipDiv.textContent = 'Could not fetch IP.';
+              ipDiv.style.position = 'absolute';
+              ipDiv.style.left = '50%';
+              ipDiv.style.top = '80%';
+              ipDiv.style.transform = 'translate(-50%,-50%)';
+              ipDiv.style.color = 'rgb(255,255,255)';
+              ipDiv.style.fontFamily = "'Orbitron','Share Tech Mono',monospace";
+              ipDiv.style.fontSize = '1.2em';
+              document.getElementById('idiotContainer').appendChild(ipDiv);
+            });
+        };
+      }
+    });
     // On page load, check if we should skip intro
     window.addEventListener('DOMContentLoaded', function() {
       if (localStorage.getItem('skipIntro') === 'true') {
