@@ -1,60 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Guides - Trust Temple</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guides - Trust Temple</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
 <div id="mainContent" class="show">
-  <button id="backBtn">Back to Home</button>
-  <div id="header">
-    <h1>Guides</h1>
+  <div id="scanlines"></div>
+  <div id="crt-effect"></div>
+  
+  <!-- Navigation -->
+  <nav id="topNav">
+    <button id="backBtn" class="nav-btn">
+      <span class="btn-icon">◄</span>
+      <span class="btn-text">BACK TO HOME</span>
+    </button>
+  </nav>
+
+  <!-- Header -->
+  <header id="header">
+    <h1 class="main-title">
+      <span class="title-line-1">MY</span>
+      <span class="title-line-2">GUIDES</span>
+    </h1>
+    
+    <!-- World Clock -->
     <div id="worldClock">
-      <div id="clockTime">EST: 00:00:00</div>
-      <div id="clockDate">January 1, 2023</div>
+      <div id="clockTime">EST: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
+      <div id="clockDate">LOADING...</div>
     </div>
-  </div>
-  <div id="topBoxContainer">
-    <div class="title-box"><h3>My Guides</h3></div>
-    <div id="whoAmIBox">
-      !Work In Progress!<br>
-      - Guide 1<br>
-      - Guide 2<br>
-      
+  </header>
+
+  <!-- Main Section -->
+  <main id="mainSection">
+    <section class="content-card featured-card">
+      <div class="card-header">
+        <h2>LIFE PHILOSOPHY</h2>
+      </div>
+      <div class="card-body">
+        <p><strong>These guides are made through personal reflection</strong>, designed for those who align with my beliefs about life and its underlying systems. They represent hard-earned wisdom from my journey.</p>
+      </div>
+    </section>
+
+    <section class="content-card wip-card">
+      <div class="card-header">
+        <h3>GUIDE TO FOCUS</h3>
+      </div>
+      <div class="card-body">
+        <p class="wip-text">⚠ COMING SOON ⚠</p>
+      </div>
+    </section>
+
+    <section class="content-card wip-card">
+      <div class="card-header">
+        <h3>GUIDE TO DISCIPLINE</h3>
+      </div>
+      <div class="card-body">
+        <p class="wip-text">⚠ COMING SOON ⚠</p>
+      </div>
+    </section>
+
+    <section class="content-card wip-card">
+      <div class="card-header">
+        <h3>GUIDE TO LEARNING</h3>
+      </div>
+      <div class="card-body">
+        <p class="wip-text">⚠ COMING SOON ⚠</p>
+      </div>
+    </section>
+
+    <section class="content-card wip-card">
+      <div class="card-header">
+        <h3>GUIDE TO BUILDING</h3>
+      </div>
+      <div class="card-body">
+        <p class="wip-text">⚠ COMING SOON ⚠</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2025 TRUST TEMPLE. ALL RIGHTS RESERVED.</span>
+      <span class="separator">|</span>
+      <span>MADE WITH EVO'S BRAIN.</span>
     </div>
-  </div>
+  </footer>
 </div>
-<script>
-  document.getElementById('backBtn').onclick = function() {
-    localStorage.setItem('skipIntro', 'true');
-    window.location.href = 'index.html';
-  };
-  function updateWorldClock() {
-    const now = new Date();
-    const estOffset = -5;
-    const estTime = new Date(now.getTime() + (estOffset * 60 * 60 * 1000));
-    const hours = estTime.getUTCHours().toString().padStart(2, '0');
-    const minutes = estTime.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = estTime.getUTCSeconds().toString().padStart(2, '0');
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateStr = estTime.toLocaleDateString('en-US', options);
-    const colon = seconds % 2 === 0 ? ':' : '<span class="blink">:</span>';
-    document.getElementById('clockTime').innerHTML = `EST: ${hours}${colon}${minutes}${colon}${seconds}`;
-    document.getElementById('clockDate').textContent = dateStr;
-  }
-  updateWorldClock();
-  setInterval(updateWorldClock, 1000);
-</script>
-</body>
-<footer class="page-footer">
-  <div class="footer-content">
-    <span>&copy; 2025 Trust Temple. All rights reserved.</span>
-    <span style="margin-left:18px;">Made with Evos brain.</span>
-  </div>
-</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
