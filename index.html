@@ -1,306 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Trust Temple</title>
-<!-- Google Fonts for futuristic style -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
-<!-- Pixel font for other parts -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-<!-- Digital font for clock -->
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-<!-- Link to external CSS -->
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trust Temple - Evo's Digital Sanctuary</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- Intro animation -->
+<!-- Intro Animation -->
 <div id="introContainer">
+  <div id="scanlines"></div>
   <div id="trustText">
     <span>T</span><span>r</span><span>u</span><span>s</span><span>t</span>
-    <span> </span>
+    <span class="space"> </span>
     <span>T</span><span>e</span><span>m</span><span>p</span><span>l</span><span>e</span>
   </div>
-  <button id="enterBtn">Enter</button>
+  <div id="enterBtnWrapper">
+    <button id="enterBtn">
+      <span class="btn-glow"></span>
+      <span class="btn-text">ENTER</span>
+    </button>
+  </div>
 </div>
 
-<!-- Main page -->
+<!-- Main Content -->
 <div id="mainContent">
-  <button id="backBtn">Back</button>
-  <div style="display:flex;justify-content:center;margin:12px 0 0 0;">
-    <button id="doNotTouchBtn" style="padding:4px 12px;font-size:0.92em;background:#222;color:#FF0000;border:2px solid #FF0000;border-radius:8px;box-shadow:0 0 4px #FF0000;cursor:pointer;font-family:'Orbitron', 'Share Tech Mono', monospace;">Do Not Touch</button>
-  </div>
+  <div id="scanlines"></div>
+  <div id="crt-effect"></div>
   
-  <div id="header">
-    <div class="header-symbol left-symbol">
-      <!-- Freemason SVG symbol (larger) -->
-      <svg width="60" height="60" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="19,4 36,34 2,34" stroke="#00FF00" stroke-width="3.5" fill="none"/>
-        <line x1="19" y1="4" x2="19" y2="34" stroke="#00FF00" stroke-width="3.5"/>
-        <circle cx="19" cy="24" r="6" stroke="#00FF00" stroke-width="2.5" fill="none"/>
+  <!-- Navigation -->
+  <nav id="topNav">
+    <button id="backBtn" class="nav-btn">
+      <span class="btn-icon">◄</span>
+      <span class="btn-text">BACK</span>
+    </button>
+    <button id="doNotTouchBtn" class="danger-btn">
+      <span class="pulse-ring"></span>
+      <span class="btn-text">⚠ DO NOT TOUCH ⚠</span>
+    </button>
+  </nav>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-symbols">
+      <svg class="masonic-symbol" width="60" height="60" viewBox="0 0 38 38">
+        <polygon points="19,4 36,34 2,34" stroke="currentColor" stroke-width="2" fill="none"/>
+        <line x1="19" y1="4" x2="19" y2="34" stroke="currentColor" stroke-width="2"/>
+        <circle cx="19" cy="24" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
       </svg>
     </div>
-    <h1>Trust Temple</h1>
-    <div class="header-symbol right-symbol">
-      <!-- Freemason SVG symbol (larger) -->
-      <svg width="60" height="60" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="19,4 36,34 2,34" stroke="#00FF00" stroke-width="3.5" fill="none"/>
-        <line x1="19" y1="4" x2="19" y2="34" stroke="#00FF00" stroke-width="3.5"/>
-        <circle cx="19" cy="24" r="6" stroke="#00FF00" stroke-width="2.5" fill="none"/>
+    
+    <h1 class="main-title">
+      <span class="title-line-1">TRUST</span>
+      <span class="title-line-2">TEMPLE</span>
+    </h1>
+    
+    <div class="header-symbols">
+      <svg class="masonic-symbol" width="60" height="60" viewBox="0 0 38 38">
+        <polygon points="19,4 36,34 2,34" stroke="currentColor" stroke-width="2" fill="none"/>
+        <line x1="19" y1="4" x2="19" y2="34" stroke="currentColor" stroke-width="2"/>
+        <circle cx="19" cy="24" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
       </svg>
     </div>
+    
+    <!-- World Clock -->
     <div id="worldClock">
-      <div id="clockTime">EST: 00:00:00</div>
-      <div id="clockDate">January 1, 2023</div>
+      <div id="clockTime">EST: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
+      <div id="clockDate">LOADING...</div>
     </div>
+  </header>
+
+  <!-- Banner -->
+  <div id="trustBanner">
+    <div class="banner-content">JUST TRUST THE TEMPLE</div>
   </div>
 
-  <!-- TRUST THE TEMPLE banner under header -->
-  <div id="trustTempleBanner">JUST TRUST THE TEMPLE</div>
-  
-  <!-- "Who Am I" section -->
-  <div id="topBoxContainer">
-    <div class="title-box"><h3>Who Am I ?</h3></div>
-    <div id="whoAmIBox">
-      Hello, I am Evo. I chose this alias to simplify my name and share my journey. This website serves as my portfolio and personal showcase. I hope it resonates with the right viewers and offers insight into who I am and what I do.
-    </div>
-  </div>
-  
-  <!-- Floating "HELLO WORLD" quote in the space below "Who Am I" -->
-  <div id="helloWorldsContainer"></div>
-  <div id="topLine" class="line"></div>
-<div id="bottomLine" class="line"></div>
-  
-  <!-- The boxes underneath, moved further down -->
-  <div id="middleSection">
-    <div id="middleBoxes">
-      <div class="section-box">
-        <div class="title-box" onclick="window.location.href='goals.html'" style="cursor: pointer;"><h3>Goals!</h3></div>
-        <div class="content-box"><p>My personal goals are goals that are very important to me. Goals can range from the average human goal, including being the richest in the family. Things like that aren't realistic if you're not doing things like making your own Trust Temple like I am. Click the goals button above to embark on my psychological goal process and listings.</p></div>
+  <!-- Main Section -->
+  <main id="mainSection">
+    <!-- Who Am I -->
+    <section class="content-card featured-card">
+      <div class="card-header">
+        <h2>WHO AM I?</h2>
       </div>
-      <div class="section-box">
-        <div class="title-box" onclick="window.location.href='inspirations.html'" style="cursor: pointer;"><h3>Inspiration's!</h3></div>
-        <div class="content-box"><p>One of my greatest inspirations would be Terry A. Davis and Ricky A. Kasso. To find out more information about these individuals followed by my reasons for being my inspirations, click the button above.</p></div>
+      <div class="card-body">
+        <p>Hello, I am <strong>Evo</strong>. I chose this alias to simplify my name and share my journey. This website serves as my portfolio and personal showcase. I hope it resonates with the right viewers and offers insight into who I am and what I do.</p>
       </div>
-      <div class="section-box">
-        <div class="title-box" onclick="window.location.href='guides.html'" style="cursor: pointer;"><h3>Guide's!</h3></div>
-        <div class="content-box"><p>Guides are made by personal reflection for your advantage, but this will only reside to people that are followers of my personal beliefs about life and other systems.</p></div>
-      </div>
-      <!-- Grouped N/A boxes below with gap -->
-    </div>
-    <div id="bottomBoxes" style="margin-top: 60px; display: flex; justify-content: center; gap: 40px;">
-      <div class="section-box">
-        <div class="title-box" onclick="window.location.href='sister.html'" style="cursor: pointer;">
-          <h3 style="margin:0; display:flex; align-items:center; justify-content:center;">
-            <svg width="38" height="38" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="22" cy="22" r="19" stroke="#fff" stroke-width="2.5" fill="none"/>
-              <polygon points="22,4 27,17 41,17 29,26 34,39 22,31 10,39 15,26 3,17 17,17" stroke="#fff" stroke-width="2.5" fill="none"/>
-            </svg>
-          </h3>
+    </section>
+
+    <!-- Floating HELLO WORLD -->
+    <div id="helloWorldContainer"></div>
+
+    <!-- Navigation Cards -->
+    <div id="navCards">
+      <article class="nav-card" data-page="goals">
+        <div class="card-header">
+          <h3>GOALS!</h3>
         </div>
-        <div class="content-box"><p style="font-size:2em; color:#fff;">?</p></div>
-      </div>
-      <div class="section-box">
-        <div class="title-box"><h3>What is this</h3></div>
-        <div class="content-box"><p>! Work In Progress !</p></div>
-      </div>
-      <div class="section-box">
-        <div class="title-box"><h3>Image Library</h3></div>
-        <div class="content-box"><p>! Work In progress !</p></div>
-      </div>
+        <div class="card-body">
+          <p>My personal goals are very important to me. Goals can range from the average human goal, including being the richest in the family. Things like that aren't realistic if you're not doing things like making your own Trust Temple like I am. Click to embark on my psychological goal process and listings.</p>
+        </div>
+        <div class="card-footer">
+          <span class="arrow">→</span>
+        </div>
+      </article>
+
+      <article class="nav-card" data-page="inspirations">
+        <div class="card-header">
+          <h3>INSPIRATIONS!</h3>
+        </div>
+        <div class="card-body">
+          <p>One of my greatest inspirations would be Terry A. Davis and Ricky A. Kasso. To find out more information about these individuals followed by my reasons for being my inspirations, click the button above.</p>
+        </div>
+        <div class="card-footer">
+          <span class="arrow">→</span>
+        </div>
+      </article>
+
+      <article class="nav-card" data-page="guides">
+        <div class="card-header">
+          <h3>GUIDES!</h3>
+        </div>
+        <div class="card-body">
+          <p>Guides are made by personal reflection for your advantage, but this will only reside to people that are followers of my personal beliefs about life and other systems.</p>
+        </div>
+        <div class="card-footer">
+          <span class="arrow">→</span>
+        </div>
+      </article>
     </div>
-  </div>
+
+    <!-- Bottom Cards -->
+    <div id="bottomCards">
+      <article class="nav-card mystery-card" data-page="sister">
+        <div class="card-header">
+          <svg width="40" height="40" viewBox="0 0 44 44" class="star-symbol">
+            <circle cx="22" cy="22" r="19" stroke="currentColor" stroke-width="2" fill="none"/>
+            <polygon points="22,4 27,17 41,17 29,26 34,39 22,31 10,39 15,26 3,17 17,17" stroke="currentColor" stroke-width="2" fill="none"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="mystery-text">?</p>
+        </div>
+      </article>
+
+      <article class="nav-card wip-card">
+        <div class="card-header">
+          <h3>WHAT IS THIS</h3>
+        </div>
+        <div class="card-body">
+          <p class="wip-text">⚠ WORK IN PROGRESS ⚠</p>
+        </div>
+      </article>
+
+      <article class="nav-card wip-card">
+        <div class="card-header">
+          <h3>IMAGE LIBRARY</h3>
+        </div>
+        <div class="card-body">
+          <p class="wip-text">⚠ WORK IN PROGRESS ⚠</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2025 TRUST TEMPLE. ALL RIGHTS RESERVED.</span>
+      <span class="separator">|</span>
+      <span>MADE WITH EVO'S BRAIN.</span>
+    </div>
+  </footer>
 </div>
 
-<script>
-
-    // Do Not Touch button logic
-    document.addEventListener('DOMContentLoaded', function() {
-      var btn = document.getElementById('doNotTouchBtn');
-      if (btn) {
-        btn.onclick = function() {
-          document.body.innerHTML = `
-            <div id="idiotContainer" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;display:flex;justify-content:center;align-items:center;overflow:hidden;">
-              <div id="idiotText" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3em;color:#fff;font-family:'Orbitron','Share Tech Mono',monospace;text-align:center;animation:glowidiot 1.2s infinite alternate;">You are an idiot</div>
-            </div>
-            <style>
-              @keyframes pop {
-                0% { opacity: 0; transform: scale(0.5); }
-                60% { opacity: 1; transform: scale(1.2); }
-                100% { opacity: 1; transform: scale(1); }
-              }
-              @keyframes glowidiot {
-                0% { color: #fff; text-shadow: 0 0 0 #fff, 0 0 0 #FF0000; }
-                50% { color: #FF0000; text-shadow: 0 0 18px #FF0000, 0 0 32px #fff; }
-                100% { color: #fff; text-shadow: 0 0 0 #fff, 0 0 0 #FF0000; }
-              }
-            </style>
-          `;
-          fetch('https://api.ipify.org?format=json')
-            .then(response => response.json())
-            .then(data => {
-              let ipCount = 0;
-              let positions = [];
-              function randomPos() {
-                // Avoid center 30% both ways
-                let left, top;
-                do {
-                  left = Math.random() * 100;
-                  top = Math.random() * 100;
-                } while (left > 35 && left < 65 && top > 35 && top < 65);
-                return {left, top};
-              }
-              function overlaps(newPos) {
-                return positions.some(pos => Math.abs(pos.left-newPos.left)<8 && Math.abs(pos.top-newPos.top)<6);
-              }
-              function addIP() {
-                let pos;
-                let tries = 0;
-                do {
-                  pos = randomPos();
-                  tries++;
-                } while (overlaps(pos) && tries < 20);
-                positions.push(pos);
-                const ipDiv = document.createElement('div');
-                ipDiv.textContent = data.ip;
-                ipDiv.style.position = 'absolute';
-                ipDiv.style.left = pos.left+'vw';
-                ipDiv.style.top = pos.top+'vh';
-                ipDiv.style.transform = 'translate(-50%,-50%)';
-                // Fade color from red to white
-                const frac = (ipCount % 20) / 20;
-                const r = 255, g = Math.round(255 * frac), b = Math.round(255 * frac);
-                ipDiv.style.color = `rgb(${r},${g},${b})`;
-                ipDiv.style.fontFamily = "'Orbitron','Share Tech Mono',monospace";
-                ipDiv.style.fontSize = '1.2em';
-                ipDiv.style.animation = `pop 1.2s both`;
-                document.getElementById('idiotContainer').appendChild(ipDiv);
-                ipCount++;
-                if (ipCount < 100) setTimeout(addIP, 600);
-              }
-              addIP();
-            })
-            .catch(() => {
-              const ipDiv = document.createElement('div');
-              ipDiv.textContent = 'Could not fetch IP.';
-              ipDiv.style.position = 'absolute';
-              ipDiv.style.left = '50%';
-              ipDiv.style.top = '80%';
-              ipDiv.style.transform = 'translate(-50%,-50%)';
-              ipDiv.style.color = 'rgb(255,255,255)';
-              ipDiv.style.fontFamily = "'Orbitron','Share Tech Mono',monospace";
-              ipDiv.style.fontSize = '1.2em';
-              document.getElementById('idiotContainer').appendChild(ipDiv);
-            });
-        };
-      }
-    });
-    // On page load, check if we should skip intro
-    window.addEventListener('DOMContentLoaded', function() {
-      if (localStorage.getItem('skipIntro') === 'true') {
-        document.getElementById('introContainer').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'flex';
-        document.getElementById('mainContent').classList.add('show');
-        localStorage.removeItem('skipIntro');
-      }
-    });
-  // Animate trust text
-  document.querySelectorAll('#trustText span').forEach((el, i) => {
-    el.style.animationDelay = `${0.6 + i*0.2}s`;
-  });
-  // Show the "Enter" button after 3 seconds
-  setTimeout(() => {
-    document.getElementById('enterBtn').classList.add('show');
-  }, 3000);
-  // Transition to main page
-  document.getElementById('enterBtn').onclick = () => {
-    document.getElementById('introContainer').style.transition = 'opacity 0.5s';
-    document.getElementById('introContainer').style.opacity = 0;
-    setTimeout(() => {
-      document.getElementById('introContainer').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'flex';
-      setTimeout(() => {
-        document.getElementById('mainContent').classList.add('show');
-      }, 50);
-    }, 500);
-  };
-  // Back button
-  document.getElementById('backBtn').onclick = () => {
-    // If coming from another page, skip intro
-    if (localStorage.getItem('skipIntro') === 'true') {
-      document.getElementById('introContainer').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'flex';
-      document.getElementById('mainContent').classList.add('show');
-      localStorage.removeItem('skipIntro');
-    } else {
-      document.getElementById('introContainer').style.display = 'flex';
-      document.getElementById('introContainer').style.opacity = 1;
-      document.getElementById('mainContent').style.display = 'none';
-      document.getElementById('mainContent').classList.remove('show');
-    }
-  };
-
-  // Animated "HELLO WORLD" airport display effect
-  const helloWorldsContainer = document.getElementById('helloWorldsContainer');
-  function createHelloWorld() {
-    const div = document.createElement('div');
-    div.className = 'helloWorldAnimated';
-    div.textContent = '"HELLO WORLD"';
-    // Always center vertically between the lines
-    const topLine = document.getElementById('topLine');
-    const bottomLine = document.getElementById('bottomLine');
-    const top = (topLine.offsetTop + bottomLine.offsetTop) / 2 - 18; // 18px is half the text height
-    div.style.top = `${top}px`;
-    div.style.left = `-300px`;
-    helloWorldsContainer.appendChild(div);
-    // Animate across the screen
-    setTimeout(() => {
-      div.style.transform = `translateX(${window.innerWidth + 400}px)`;
-    }, 10);
-    // Remove after animation
-    setTimeout(() => {
-      helloWorldsContainer.removeChild(div);
-    }, 9000);
-  }
-  // Launch a new hello world every 2-4 seconds, with some randomness
-  function launchHelloWorlds() {
-    createHelloWorld();
-    setTimeout(launchHelloWorlds, 2000 + Math.random() * 2000);
-  }
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(launchHelloWorlds, 1000);
-  });
-
-  // World Clock Functionality
-  function updateWorldClock() {
-    // Get current UTC time
-    const now = new Date();
-    
-    // Convert to EST (UTC-5 for standard time, UTC-4 for daylight saving)
-    // Simple EST conversion (doesn't account for DST changes)
-    const estOffset = -5; // EST is UTC-5
-    const estTime = new Date(now.getTime() + (estOffset * 60 * 60 * 1000));
-    
-    // Format time
-    const hours = estTime.getUTCHours().toString().padStart(2, '0');
-    const minutes = estTime.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = estTime.getUTCSeconds().toString().padStart(2, '0');
-    
-    // Format date
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateStr = estTime.toLocaleDateString('en-US', options);
-    
-    // Update display with blinking colon
-    const colon = seconds % 2 === 0 ? ':' : '<span class="blink">:</span>';
-    document.getElementById('clockTime').innerHTML = `EST: ${hours}${colon}${minutes}${colon}${seconds}`;
-    document.getElementById('clockDate').textContent = dateStr;
-  }
-
-  // Initialize and update clock every second
-  updateWorldClock();
-  setInterval(updateWorldClock, 1000);
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
