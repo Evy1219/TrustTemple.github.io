@@ -1,71 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Goals - Trust Temple</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Goals - Trust Temple</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-<!-- Main page -->
 <div id="mainContent" class="show">
-  <button id="backBtn">Back to Home</button>
+  <div id="scanlines"></div>
+  <div id="crt-effect"></div>
   
-  <div id="header">
-    <h1>Goals</h1>
+  <!-- Navigation -->
+  <nav id="topNav">
+    <button id="backBtn" class="nav-btn">
+      <span class="btn-icon">◄</span>
+      <span class="btn-text">BACK TO HOME</span>
+    </button>
+  </nav>
+
+  <!-- Header -->
+  <header id="header">
+    <h1 class="main-title">
+      <span class="title-line-1">MY</span>
+      <span class="title-line-2">GOALS</span>
+    </h1>
+    
+    <!-- World Clock -->
     <div id="worldClock">
-      <div id="clockTime">EST: 00:00:00</div>
-      <div id="clockDate">January 1, 2023</div>
+      <div id="clockTime">EST: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span></div>
+      <div id="clockDate">LOADING...</div>
     </div>
-  </div>
-  
-  <div id="topBoxContainer">
-    <div class="title-box"><h3>My Goals</h3></div>
-    <div id="whoAmIBox">
-      Here you can list your personal goals. For example:<br>
-      - Achieve financial independence<br>
-      - Build a successful portfolio website<br>
-      - Learn new skills<br>
-      - Help others in the community<br>
-      Add more details as needed.
+  </header>
+
+  <!-- Main Section -->
+  <main id="mainSection">
+    <section class="content-card featured-card">
+      <div class="card-header">
+        <h2>PERSONAL GOALS</h2>
+      </div>
+      <div class="card-body">
+        <p><strong>My goals are very important to me</strong>. They range from achieving financial independence to mastering my craft. Building this Trust Temple is part of that journey - a digital sanctuary where I document my progress and aspirations.</p>
+      </div>
+    </section>
+
+    <section class="content-card">
+      <div class="card-header">
+        <h3>FINANCIAL INDEPENDENCE</h3>
+      </div>
+      <div class="card-body">
+        <p>Achieve financial freedom through strategic planning, skill development, and smart investments. Be the richest in my family not through luck, but through dedication and hard work.</p>
+      </div>
+    </section>
+
+    <section class="content-card">
+      <div class="card-header">
+        <h3>TECHNICAL MASTERY</h3>
+      </div>
+      <div class="card-body">
+        <p>Master computer science, programming, and digital creation. Build projects that matter, contribute to open source, and create tools that help others.</p>
+      </div>
+    </section>
+
+    <section class="content-card">
+      <div class="card-header">
+        <h3>PERSONAL GROWTH</h3>
+      </div>
+      <div class="card-body">
+        <p>Continue learning, evolving, and becoming the best version of myself. Develop mental resilience, emotional intelligence, and unwavering discipline.</p>
+      </div>
+    </section>
+
+    <section class="content-card">
+      <div class="card-header">
+        <h3>LEGACY BUILDING</h3>
+      </div>
+      <div class="card-body">
+        <p>Create something that outlasts me. Build systems, share knowledge, and inspire others to pursue their own greatness. Leave the world better than I found it.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <span>© 2025 TRUST TEMPLE. ALL RIGHTS RESERVED.</span>
+      <span class="separator">|</span>
+      <span>MADE WITH EVO'S BRAIN.</span>
     </div>
-  </div>
-  
+  </footer>
 </div>
 
-<script>
-  // Back button logic to skip intro
-  document.getElementById('backBtn').onclick = function() {
-    localStorage.setItem('skipIntro', 'true');
-    window.location.href = 'index.html';
-  };
-  // World Clock Functionality (same as index.html)
-  function updateWorldClock() {
-    const now = new Date();
-    const estOffset = -5;
-    const estTime = new Date(now.getTime() + (estOffset * 60 * 60 * 1000));
-    const hours = estTime.getUTCHours().toString().padStart(2, '0');
-    const minutes = estTime.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = estTime.getUTCSeconds().toString().padStart(2, '0');
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const dateStr = estTime.toLocaleDateString('en-US', options);
-    const colon = seconds % 2 === 0 ? ':' : '<span class="blink">:</span>';
-    document.getElementById('clockTime').innerHTML = `EST: ${hours}${colon}${minutes}${colon}${seconds}`;
-    document.getElementById('clockDate').textContent = dateStr;
-  }
-  updateWorldClock();
-  setInterval(updateWorldClock, 1000);
-</script>
-<footer class="page-footer">
-  <div class="footer-content">
-    <span>&copy; 2025 Trust Temple. All rights reserved.</span>
-    <span style="margin-left:18px;">Made with Evos brain.</span>
-  </div>
-</footer>
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
